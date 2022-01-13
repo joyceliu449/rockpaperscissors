@@ -1,20 +1,25 @@
 $(".play").click(function () {
-
   let userInput = $(".input").val().toLowerCase();
   $(".userChoice").text(userInput);
 
   let computerChoice = "";
   let randomNumber = Math.ceil(Math.random() * 3);
-  if (randomNumber === 1) {
-    computerChoice = "scissors";
-  } else if (randomNumber === 2) {
-    computerChoice = "rock";
-  } else if (randomNumber === 3) {
-    computerChoice = "paper";
-  }
-  $(".computerChoice").text(computerChoice);
+  getRandomComputerChoice();
 
-  function result() {
+  function getRandomComputerChoice() {
+    if (randomNumber === 1) {
+      computerChoice = "scissors";
+    } else if (randomNumber === 2) {
+      computerChoice = "rock";
+    } else if (randomNumber === 3) {
+      computerChoice = "paper";
+    }
+    $(".computerChoice").text(computerChoice);
+    return computerChoice;
+  }
+  
+  chooseWinner(userInput, computerChoice);
+  function chooseWinner(userInput, computerChoice) {
     if (
       (userInput === "scissors" && computerChoice === "rock") ||
       (userInput === "rock" && computerChoice === "paper") ||
@@ -36,7 +41,6 @@ $(".play").click(function () {
     }
   }
 
-
-  $(".result").text(result());
+  $(".result").text(chooseWinner(userInput, computerChoice));
   $(".input").val("");
 });
